@@ -3,7 +3,6 @@
 include_once 'common.php';
 
 $lastId = filter_input(INPUT_POST, 'lastId', FILTER_VALIDATE_INT, array('options' => array('default' => 0)));
-$modifiedSince = strtotime(filter_input(INPUT_POST, 'HTTP_IF_MODIFIED_SINCE'));
 
 $file = fopen(TAAB_BACKEND, "r");
 $newPosts = array();
