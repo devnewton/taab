@@ -114,12 +114,14 @@ tagAttribute
  {return { name: name, value: value}}
 
 norloge
- = n:(fullNorloge / normalNorloge / shortNorloge)
- { return '<time>' + n +'</time>'}
+ = fullNorloge / normalNorloge / shortNorloge
 
 fullNorloge
- = y: norlogeYear "-" m: norlogeMonth "-" d:norlogeDay "T" nn:normalNorloge
- { return y + "-" + m + "-" + d + "T" + nn; }
+ = y: norlogeYear "-" m: norlogeMonth "-" d:norlogeDay "T" h:norlogeHours ":" mi:norlogeMinutes ":" s:norlogeSeconds
+ {
+ var time = h + ':' + mi  + ':' + s;
+ return '<time title="' + y + "-" + m + "-" + d + "T" + time + '">' + time + '</time>';
+ }
  
 norlogeYear
  = digits: [0-9]+
@@ -134,15 +136,21 @@ norlogeDay
  { return first + last; }
 
 normalNorloge
- = sn:shortNorloge ":" s:norlogeSeconds
- { return sn + ":" + s; }
+ = h:norlogeHours ":" mi:norlogeMinutes ":" s:norlogeSeconds
+ {
+ var time = h + ':' + mi  + ':' + s;
+ return '<time title="' + time + '">' + time + '</time>';
+ }
  
 shortNorloge
- = h:norlogeHours ":" m:norlogeMinutes
- { return h + ":" + m; }
+ = h:norlogeHours ":" mi:norlogeMinutes
+ {
+ var time = h + ':' + mi;
+ return '<time title="' + time + '">' + time + '</time>';
+ }
 
 norlogeHours
- = first: [0-2] last: [0-3]
+ = first: [0-2] last: [0-9]
  { return first + last; }
  
 norlogeMinutes
