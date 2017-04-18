@@ -1,0 +1,74 @@
+article:nth-of-type(odd) {
+	background-color: #FBFBFB;
+}
+
+time {
+	padding-right: 5px;
+	padding-left: 5px;
+	text-align: center;
+	color: black;
+	font-weight: bold;
+	white-space: nowrap;
+	border-radius: 8px;
+	border: 1px solid grey;
+	display: inline-block;
+	vertical-align: text-top;
+}
+
+cite {
+	padding-right: 5px;
+	padding-left: 5px;
+	color: #833;
+	display: inline-block;
+	word-break: break-all;
+	border-radius: 8px;
+	border: 1px solid grey;
+	vertical-align: text-top;
+}
+
+p {
+	padding-right: 5px;
+	padding-left: 5px;
+	color: black;
+	word-break: break-all;
+	display: block;
+	vertical-align: text-top;
+}
+
+p a {
+	font-weight: bold;
+	color: #1690f3;
+}
+
+p a:hover {
+	text-decoration: underline;
+}
+
+p a:visited {
+	color: #0b78d0;
+}
+
+p cite {
+	color: #5F7FBF;
+        cursor: pointer; 
+}
+
+.jb3-totoz {
+	position: relative;
+	font-weight: bold;
+	color: #0A1;
+}
+
+.jb3-totoz img {
+	display: none;
+}
+
+.jb3-totoz:hover img {
+	display: inline;
+	position: absolute;
+	bottom: 100%;
+}
+
+.jb3-bigorno {
+	border: 1px solid #F00;
+}

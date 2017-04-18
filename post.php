@@ -28,7 +28,8 @@ array_splice($newPosts, TAAB_BACKEND_MAX_POSTS);
 ftruncate($file, 0);
 fseek($file, 0);
 foreach ($newPosts as $post) {
-    fputcsv($file, $post, "\t");
+    fputs($file, implode("\t", $post));
+    fputs($file, "\n");
 }
 fclose($file);
 

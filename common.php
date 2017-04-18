@@ -10,7 +10,8 @@ function taab_echo_backend($posts, $lastId, $newPostId) {
     $outstream = fopen("php://output", 'w');
     foreach ($posts as $post) {
         if ($post[0] > $lastId) {
-            fputcsv($outstream, $post, "\t");
+            fputs($outstream, implode("\t", $post));
+            fputs($outstream, "\n");
         }
     }
     fclose($outstream);

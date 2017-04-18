@@ -1,10 +1,8 @@
 var taab_coincoin = new Vue({
     el: '#taab-coincoin',
     data: {
-        posts: [
-            {id: 2, time: 20170414131127, login: "dave", info: "ff", message: "nan dsl"},
-            {id: 1, time: 20170414131127, login: "euro", info: "ie", message: "plop"}
-        ]
+        message: "",
+        posts: []
     },
     methods: {
         post: function (e) {
@@ -23,16 +21,8 @@ var taab_coincoin = new Vue({
             xhr.open("POST", "post.php");
             xhr.send(body);
         },
-        parseBackendResponse: function (responseText) {
-            this.posts = responseText.split(/\r\n|\n/).map(function (line) {
-                var post = line.split(/\t/);
-                return {id: post[0], time: post[1], login: post[2], info: post[3], message: post[4]};
-            });
-        }
-    },
-    mounted: function () {
-        var self = this;
-        setInterval(function () {
+        get: function () {
+            var self = this;
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
@@ -43,6 +33,32 @@ var taab_coincoin = new Vue({
             };
             xhr.open("GET", "get.php");
             xhr.send();
+        },
+        norlogeClicked: function (e) {
+            this.message += e.target.title + " ";
+            this.$refs.message.focus();
+        },
+        parseBackendResponse: function (responseText) {
+            this.posts = responseText.split(/\r\n|\n/).map(function (line) {
+                var post = line.split(/\t/);
+                if (post.length >= 5) {
+                    var time = post[1];
+                    var formattedTime = time.substr(0, 4) + "-" + time.substr(4, 2) + "-" + time.substr(6, 2) + "T" + time.substr(8, 2) + ":" + time.substr(10, 2) + ":" + time.substr(12, 2);
+                    var htmlMessage = taab_backend2html.parse(post[4]);
+                    return {id: post[0], time: formattedTime, login: post[2], info: post[3], message: htmlMessage};
+                } else {
+                    return false;
+                }
+            }).filter(function (post) {
+                return !!post;
+            });
+        },
+    },
+    mounted: function () {
+        var self = this;
+        self.get();
+        setInterval(function () {
+            self.get();
         }, 5000);
     }
 });
