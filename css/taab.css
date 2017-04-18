@@ -58,6 +58,10 @@ p cite {
         cursor: pointer; 
 }
 
+.highlighted {
+    background-color: #FFD202 !important;
+}
+
 .jb3-totoz {
 	position: relative;
 	font-weight: bold;

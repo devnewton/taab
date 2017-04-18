@@ -12,8 +12,8 @@ var taab_coincoin = new Vue({
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
-                        form.reset();
                         self.parseBackendResponse(xhr.responseText);
+                        self.message = "";
                     }
                 }
             };
@@ -34,9 +34,43 @@ var taab_coincoin = new Vue({
             xhr.open("GET", "get.php");
             xhr.send();
         },
-        norlogeClicked: function (e) {
-            this.message += e.target.title + " ";
-            this.$refs.message.focus();
+        clicked: function (e) {
+            switch (e.target.tagName) {
+                case 'TIME':
+                    if (e.target.title) {
+                        this.message += e.target.title + " ";
+                        this.$refs.message.focus();
+                    }
+                    break;
+            }
+        },
+        mouseEntered: function (e) {
+            switch (e.target.tagName) {
+                case 'TIME':
+                    if (e.target.title) {
+                        var times = document.getElementsByTagName('time');
+                        for (var i = 0; i < times.length; i++) {
+                            var time = times[i];
+                            if (time.title === e.target.title) {
+                                time.className = "highlighted";
+                            }
+                        }
+                    }
+                    break;
+            }
+        },
+        mouseLeaved: function (e) {
+            switch (e.target.tagName) {
+                case 'TIME':
+                    if (e.target.title) {
+                        var times = document.getElementsByTagName('time');
+                        for (var i = 0; i < times.length; i++) {
+                            var time = times[i];
+                            time.className = "";
+                        }
+                    }
+                    break;
+            }
         },
         parseBackendResponse: function (responseText) {
             this.posts = responseText.split(/\r\n|\n/).map(function (line) {

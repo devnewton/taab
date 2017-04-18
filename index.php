@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="css/taab.css">
     </head>
     <body class="c-text">
-        <main id="taab-coincoin" class="o-container o-container--large u-pillar-box--small">
+        <main id="taab-coincoin" class="o-container o-container--large u-pillar-box--small" v-on:click="clicked" v-on:mouseover="mouseEntered" v-on:mouseout="mouseLeaved">
             <form class="c-input-group" v-on:submit.prevent="post" accept-charset="UTF-8" autofocus>
                 <div class="o-field">
                     <input v-model="message" ref="message" name="message" class="c-field">
@@ -16,7 +16,7 @@
             </form>
             <template v-for="post of posts">
                 <article v-bind:id="post.id">
-                    <time v-bind:title="post.time" v-on:click.prevent="norlogeClicked">{{ post.time.substr(11) }}</time>
+                    <time v-bind:title="post.time">{{ post.time.substr(11) }}</time>
                     <cite v-bind:title="post.info">{{ post.login || post.info }}</cite>
                     <p v-html="post.message"></p>
                 </article>
