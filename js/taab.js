@@ -62,6 +62,12 @@ var taab_coincoin = new Vue({
                         this.$refs.message.focus();
                     }
                     break;
+                case 'CITE':
+                    if (e.target.innerText) {
+                        this.message += e.target.innerText + "< ";
+                        this.$refs.message.focus();
+                    }
+                    break;
             }
         },
         mouseEntered: function (e) {
