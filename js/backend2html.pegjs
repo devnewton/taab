@@ -166,7 +166,7 @@ bigorno
 totoz
   = first:"[:" totoz:[^\]]+ third:"]"
   { var totozId = totoz.join(""); 
-  return '<figure>' + backend2html.encode(totozId) + <img src="https://totoz.eu/img/' + encodeURI(totozId) + '"></figure>'; }
+  return '<figure>' + backend2html.encode(totozId) + '<img src="https://totoz.eu/img/' + encodeURI(totozId) + '"></figure>'; }
   
 whitespaces
  = inputStart / [ \t\r\n] / ! .
