@@ -24,6 +24,7 @@
                 </template>
             </transition-group>
         </main>
+        <footer class="o-container o-container--xsmall u-pillar-box--xsmall u-xsmall">Discussion powered by <a href="https://github.com/devnewton/taab">taab</a></footer>
         <script src="js/vue.js" defer></script>
         <script src="js/taab-backend2html.js" defer></script>
         <script src="js/taab.js" defer></script>
