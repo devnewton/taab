@@ -88,3 +88,11 @@ figure:hover img {
 .jb3-bigorno {
 	border: 1px solid #F00;
 }
+
+.posts-enter-active, .posts-leave-active {
+  transition: all 1s;
+}
+.posts-enter, .posts-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}

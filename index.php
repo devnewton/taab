@@ -14,13 +14,15 @@
                 </div>
                 <button type="submit" class="c-button c-button--info">Post</button>
             </form>
-            <template v-for="post of posts">
-                <article v-bind:id="post.id">
-                    <time v-bind:title="post.time">{{ post.time.substr(11) }}</time>
-                    <cite v-bind:title="post.info">{{ post.login || post.info }}</cite>
-                    <p v-html="post.message"></p>
-                </article>
-            </template>
+            <transition-group name="posts" tag="div">
+                <template v-for="post of posts">
+                    <article v-bind:key="post.id">
+                        <time v-bind:title="post.time">{{ post.time.substr(11) }}</time>
+                        <cite v-bind:title="post.info">{{ post.login || post.info }}</cite>
+                        <p v-html="post.message"></p>
+                    </article>
+                </template>
+            </transition-group>
         </main>
         <script src="js/vue.js" defer></script>
         <script src="js/taab-backend2html.js" defer></script>
