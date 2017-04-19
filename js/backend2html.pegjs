@@ -5,7 +5,7 @@ backend2html.tagStack = [];
 backend2html.encode = function encode(e) {
     return e.replace(/[.]/g, function(e) {
         return "&#"+e.charCodeAt(0)+";";
-    }‌);
+    });
 };
 
 }
@@ -61,7 +61,6 @@ openTag
  = "<" tag:validFormatTag ">"
  {
  	backend2html.tagStack.push(tag);
-    console.log("push " + tag);
  	return "<" + tag + ">";
  }
 
@@ -89,11 +88,11 @@ validFormatTag
 
 invalidOpenTag
  = "<" tag:invalidTag ">"
- { return "&lt" + tag; + "&gt"; }
+ { return "&lt" + tag + "&gt"; }
 
 invalidCloseTag
  = "</" tag:invalidTag ">"
- { return  "&lt/" + tag; + "&gt";; }
+ { return  "&lt/" + tag + "&gt"; }
  
 invalidTag
  = [A-Za-z] (xmlSpecialChar / [^>])*

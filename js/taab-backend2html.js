@@ -177,7 +177,6 @@ taab_backend2html = /*
         peg$c27 = function(protocol, url) { return [].concat('<a href="', protocol, encodeURI(url.join("")), '" target="_blank"></a>').join("");},
         peg$c28 = function(tag) {
          	backend2html.tagStack.push(tag);
-            console.log("push " + tag);
          	return "<" + tag + ">";
          },
         peg$c29 = "</",
@@ -206,8 +205,8 @@ taab_backend2html = /*
         peg$c37 = peg$literalExpectation("u", false),
         peg$c38 = "tt",
         peg$c39 = peg$literalExpectation("tt", false),
-        peg$c40 = function(tag) { return "&lt" + tag; + "&gt"; },
-        peg$c41 = function(tag) { return  "&lt/" + tag; + "&gt";; },
+        peg$c40 = function(tag) { return "&lt" + tag + "&gt"; },
+        peg$c41 = function(tag) { return  "&lt/" + tag + "&gt"; },
         peg$c42 = /^[A-Za-z]/,
         peg$c43 = peg$classExpectation([["A", "Z"], ["a", "z"]], false, false),
         peg$c44 = /^[^>]/,
