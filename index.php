@@ -10,7 +10,7 @@
         <main id="taab-coincoin" class="o-container o-container--large u-pillar-box--small" v-on:click="clicked" v-on:mouseover="mouseEntered" v-on:mouseout="mouseLeaved">
             <form class="c-input-group" v-on:submit.prevent="post" accept-charset="UTF-8" autofocus>
                 <div class="o-field">
-                    <input v-model="message" ref="message" name="message" class="c-field">
+                    <input v-model="message" ref="message" name="message" class="c-field" spellcheck="true">
                 </div>
                 <button type="submit" class="c-button c-button--info">Post</button>
             </form>
