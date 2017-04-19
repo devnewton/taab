@@ -1,0 +1,66 @@
+swagger: '2.0'
+info:
+  title: taab API
+  description: Incubate excellence with taab
+  version: "1.0.0"
+host: taab.bci.im
+schemes:
+  - https
+produces:
+  - text/tab-separated-values
+paths:
+  /get.php:
+    get:
+      description: |
+        Get latest posts in TSV format
+      parameters:
+        - name: lastId
+          in: query
+          description: Last id retrieved by consumer
+          required: false
+          type: number
+          format: integer
+      produces:
+        - text/tab-separated-values
+      tags:
+        - Posts
+      responses:
+        200:
+          description: latest posts in TSV format
+          schema:
+            type: file
+  /post.php:
+    post:
+      description: |
+        Post a message and retrieve latest posts in TSV format
+      parameters:
+        - name: message
+          in: formData
+          description: Message in BML format
+          required: true
+          type: string
+        - name: login
+          in: formData
+          description: User login
+          required: false
+          type: string
+        - name: User-Agent
+          in: header
+          description: User information
+          required: false
+          type: string
+        - name: lastId
+          in: formData
+          description: Last id retrieved by consumer
+          required: false
+          type: number
+          format: integer
+      consumes:
+        - multipart/form-data
+      tags:
+        - Posts
+      responses:
+        200:
+          description: latest posts in TSV format
+          schema:
+            type: file
