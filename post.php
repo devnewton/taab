@@ -22,7 +22,7 @@ if (strlen(trim($message)) > 0) {
     ++$newPostId;
     $dateTime = date_create("now", timezone_open("Europe/Paris"));
     $time = date_format($dateTime, 'YmdHis');
-    array_unshift($newPosts, array($newPostId, $time, $login, $info, $message));
+    array_unshift($newPosts, array($newPostId, $time, $info, $login, $message));
 }
 array_splice($newPosts, TAAB_BACKEND_MAX_POSTS);
 ftruncate($file, 0);

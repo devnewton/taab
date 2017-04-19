@@ -105,7 +105,7 @@ var taab_coincoin = new Vue({
                     var time = post[1];
                     var formattedTime = time.substr(0, 4) + "-" + time.substr(4, 2) + "-" + time.substr(6, 2) + "T" + time.substr(8, 2) + ":" + time.substr(10, 2) + ":" + time.substr(12, 2);
                     var htmlMessage = taab_backend2html.parse(post[4]);
-                    return {id: post[0], time: formattedTime, login: post[2], info: post[3], message: htmlMessage};
+                    return {id: post[0], time: formattedTime, info: post[2], login: post[3], message: htmlMessage};
                 } else {
                     return false;
                 }
