@@ -3,7 +3,7 @@
 include_once 'common.php';
 
 $lastId = filter_input(INPUT_POST, 'lastId', FILTER_VALIDATE_INT, array('options' => array('default' => 0)));
-$message = substr(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW), 0, TAAB_MAX_POST_LENGTH);
+$message = substr(filter_input(INPUT_POST, 'message', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW), 0, TAAB_MAX_POST_LENGTH);
 $login = trim(substr(filter_input(INPUT_POST, 'login', FILTER_SANITIZE_EMAIL), 0, TAAB_MAX_LOGIN_LENGTH));
 $info = trim(substr(filter_input(INPUT_SERVER, 'HTTP_USER_AGENT', FILTER_SANITIZE_EMAIL), 0, TAAB_MAX_INFO_LENGTH));
 if (strlen($login) === 0 && strlen($info) === 0) {
