@@ -6,20 +6,28 @@ var taab_coincoin = new Vue({
     },
     methods: {
         post: function (e) {
-            var self = this;
-            var form = e.target;
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        self.parseBackendResponse(xhr.responseText);
-                        self.message = "";
+            if (this.handleCommand()) {
+                this.message = "";
+            } else {
+                var self = this;
+                var form = e.target;
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            self.parseBackendResponse(xhr.responseText);
+                            self.message = "";
+                        }
                     }
+                };
+                var body = new FormData(form);
+                var login = localStorage.login;
+                if (login) {
+                    body.append('login', login);
                 }
-            };
-            var body = new FormData(form);
-            xhr.open("POST", "post.php");
-            xhr.send(body);
+                xhr.open("POST", "post.php");
+                xhr.send(body);
+            }
         },
         get: function () {
             var self = this;
@@ -33,6 +41,18 @@ var taab_coincoin = new Vue({
             };
             xhr.open("GET", "get.php");
             xhr.send();
+        },
+        handleCommand: function () {
+            return this.handleCommandNick();
+        },
+        handleCommandNick: function () {
+            var result = /\/nick (.*)/.exec(this.message);
+            if (result && result.length === 2) {
+                localStorage.login = result[1];
+                return true;
+            } else {
+                return false;
+            }
         },
         clicked: function (e) {
             switch (e.target.tagName) {
@@ -86,7 +106,7 @@ var taab_coincoin = new Vue({
             }).filter(function (post) {
                 return !!post;
             });
-        },
+        }
     },
     mounted: function () {
         var self = this;
