@@ -1,6 +1,13 @@
 {
 var backend2html = {};
 backend2html.tagStack = [];
+
+backend2html.encode = function encode(e) {
+    return e.replace(/[.]/g, function(e) {
+        return "&#"+e.charCodeAt(0)+";";
+    }‌);
+};
+
 }
 
 post
@@ -18,7 +25,6 @@ postItem
  / totoz
  / bigorno
  / norloge
- / atag
  / openTag
  / closeTag
  / xmlSpecialChar
@@ -49,7 +55,7 @@ apos
  
 url
  = protocol:$((("http" "s"?) / "ftp") "://") url:(xmlSpecialChar / [^ \t\r\n])+
- { return [].concat('<a href="', protocol, url.join(""), '" target="_blank"></a>').join("");}
+ { return [].concat('<a href="', protocol, encodeURI(url.join("")), '" target="_blank"></a>').join("");}
 
 openTag
  = "<" tag:validFormatTag ">"
@@ -91,14 +97,6 @@ invalidCloseTag
  
 invalidTag
  = [A-Za-z] (xmlSpecialChar / [^>])*
-
-atag
- = "<a" attributes:tagAttributes ">" [^<]* "</a>"
- { 
-   if(attributes.href) {
-      return "<url>" + attributes.href + "</url>";
-   }
- }
  
 tagAttributes
  = attributes:(separator:" " attribute:tagAttribute { return attribute;})*
@@ -168,7 +166,7 @@ bigorno
 totoz
   = first:"[:" totoz:[^\]]+ third:"]"
   { var totozId = totoz.join(""); 
-  return '<img src="https://totoz.eu/img/' + totozId + '">'; }
+  return '<figure>' + backend2html.encode(totozId) + <img src="https://totoz.eu/img/' + encodeURI(totozId) + '"></figure>'; }
   
 whitespaces
  = inputStart / [ \t\r\n] / ! .

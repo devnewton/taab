@@ -62,20 +62,22 @@ p cite {
     background-color: #FFD202 !important;
 }
 
-.jb3-totoz {
+figure {
+        display: inline;
 	position: relative;
 	font-weight: bold;
 	color: #0A1;
+        margin: unset;
 }
 
-.jb3-totoz img {
+figure img {
 	display: none;
 }
 
-.jb3-totoz:hover img {
+figure:hover img {
 	display: inline;
 	position: absolute;
-	bottom: 100%;
+	top: 100%;
 }
 
 .jb3-bigorno {
