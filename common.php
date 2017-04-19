@@ -2,9 +2,9 @@
 
 include_once "config.php";
 
-function taab_echo_backend($posts, $lastId, $newPostId) {
+function taab_echo_backend($posts, $lastId, $newPostId = NULL) {
     header("Content-Type: text/tab-separated-values");
-    if (isset($newPostId)) {
+    if ($newPostId !== NULL) {
         header('X-Post-Id: ' . $newPostId);
     }
     $outstream = fopen("php://output", 'w');
