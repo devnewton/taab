@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>taab</title>
         <link rel="stylesheet" href="css/blaze.css">
         <link rel="stylesheet" href="css/taab.css">
     </head>
