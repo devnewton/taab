@@ -130,6 +130,6 @@ var taab_coincoin = new Vue({
         self.get();
         setInterval(function () {
             self.get();
-        }, 5000);
+        }, 30000);
     }
 });
