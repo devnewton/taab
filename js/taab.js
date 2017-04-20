@@ -100,7 +100,7 @@ var taab_coincoin = new Vue({
             }
         },
         parseBackendResponse: function (responseText) {
-            this.posts = responseText.split(/\r\n|\n/).map(function (line) {
+            var newPosts = responseText.split(/\r\n|\n/).map(function (line) {
                 var post = line.split(/\t/);
                 if (post.length >= 5) {
                     var time = post[1];
@@ -111,7 +111,12 @@ var taab_coincoin = new Vue({
                     return false;
                 }
             }).filter(function (post) {
-                return !!post;
+                return post && post.id && post.time && post.message;
+            }).concat(this.posts);
+            this.posts = newPosts.sort(function (a, b) {
+                return b.id - a.id;
+            }).filter(function (elem, pos) {
+                return newPosts.indexOf(elem) === pos;
             });
         },
         getLastId: function () {
