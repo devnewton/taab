@@ -174,7 +174,7 @@ taab_backend2html = /*
         peg$c24 = peg$literalExpectation("://", false),
         peg$c25 = /^[^ \t\r\n]/,
         peg$c26 = peg$classExpectation([" ", "\t", "\r", "\n"], true, false),
-        peg$c27 = function(protocol, url) { return [].concat('<a href="', protocol, encodeURI(url.join("")), '" target="_blank"></a>').join("");},
+        peg$c27 = function(protocol, url) { return [].concat('<a href="', protocol, encodeURI(url.join("")), '" target="_blank">url</a>').join("");},
         peg$c28 = function(tag) {
          	backend2html.tagStack.push(tag);
          	return "<" + tag + ">";
