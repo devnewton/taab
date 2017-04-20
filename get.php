@@ -2,7 +2,7 @@
 
 include_once 'common.php';
 
-$lastId = filter_input(INPUT_POST, 'lastId', FILTER_VALIDATE_INT, array('options' => array('default' => 0)));
+$lastId = filter_input(INPUT_GET, 'lastId', FILTER_VALIDATE_INT, array('options' => array('default' => 0)));
 
 $file = fopen(TAAB_BACKEND, "r");
 $newPosts = array();

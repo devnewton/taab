@@ -23,8 +23,9 @@ var taab_coincoin = new Vue({
                 var body = new FormData(form);
                 var login = localStorage.login;
                 if (login) {
-                    body.append('login', login);
+                    body.append("login", login);
                 }
+                body.append("lastId", self.getLastId());
                 xhr.open("POST", "post.php");
                 xhr.send(body);
             }
@@ -39,7 +40,7 @@ var taab_coincoin = new Vue({
                     }
                 }
             };
-            xhr.open("GET", "get.php");
+            xhr.open("GET", "get.php?lastId=" + encodeURIComponent(self.getLastId()));
             xhr.send();
         },
         handleCommand: function () {
@@ -112,6 +113,11 @@ var taab_coincoin = new Vue({
             }).filter(function (post) {
                 return !!post;
             });
+        },
+        getLastId: function () {
+            return this.posts.reduce(function (acc, val) {
+                return Math.max(acc, val.id);
+            }, 0);
         }
     },
     mounted: function () {
