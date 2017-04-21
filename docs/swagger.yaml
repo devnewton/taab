@@ -22,11 +22,10 @@ paths:
           format: integer
       produces:
         - text/tab-separated-values
-      tags:
-        - Posts
       responses:
         200:
-          description: latest posts in TSV format
+          description:
+            $ref: 'backend.md'
           schema:
             type: file
   /post.php:
@@ -57,10 +56,11 @@ paths:
           format: integer
       consumes:
         - multipart/form-data
-      tags:
-        - Posts
+      produces:
+        - text/tab-separated-values
       responses:
         200:
-          description: latest posts in TSV format
+          description:
+            $ref: 'backend.md'
           schema:
             type: file

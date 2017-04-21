@@ -1,4 +1,4 @@
-Messages returned by /get.php et /post.php backend responses in TSV.
+Messages are returned in TSV format.
 
 # TSV format
 
