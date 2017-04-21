@@ -159,8 +159,8 @@ norlogeSeconds
  { return first + last; }
 
 bigorno
- = whitespaces bigorno:[a-zA-Z0-9-_]+ "<" &(whitespaces / [<[])
- { return [].concat('<cite>', bigorno,'</cite>').join("")}
+ = spaces:$(inputStart / whitespaces) s2:whitespaces? bigorno:$[a-zA-Z0-9-_]+ "<" &(whitespaces / [<[] / !.)
+ { return spaces + '<cite>' + bigorno + '</cite>';}
 
 totoz
   = first:"[:" totoz:[^\]]+ third:"]"
@@ -168,7 +168,7 @@ totoz
   return '<figure>' + backend2html.encode(totozId) + '<img src="https://totoz.eu/img/' + encodeURI(totozId) + '"></figure>'; }
   
 whitespaces
- = inputStart / [ \t\r\n] / ! .
+ = [ \t\r\n]
 
 inputStart
  = & { return location().start.offset == 0; }
