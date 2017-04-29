@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="css/taab.css">
     </head>
     <body class="c-text">
-        <main id="taab-coincoin" class="o-container o-container--large u-pillar-box--small" v-on:click="clicked" v-on:mouseover="mouseEntered" v-on:mouseout="mouseLeaved">
+        <main id="taab-coincoin" class="o-container o-container--super u-window-box--tiny" v-on:click="clicked" v-on:mouseover="mouseEntered" v-on:mouseout="mouseLeaved">
             <form class="c-input-group" v-on:submit.prevent="post" accept-charset="UTF-8" autofocus>
                 <div class="o-field">
                     <input v-model="message" ref="message" name="message" placeholder="message or command (/nick)" class="c-field" spellcheck="true">
