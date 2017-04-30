@@ -54,8 +54,8 @@ apos
  { return "&apos;"; }
  
 url
- = protocol:$((("http" "s"?) / "ftp") "://") url:(xmlSpecialChar / [^ \t\r\n])+
- { return [].concat('<a href="', protocol, encodeURI(url.join("")), '" target="_blank">url</a>').join("");}
+ = protocol:$((("http" "s"?) / "ftp") "://") url:$([^< \t\r\n])+
+ { return [].concat('<a href="', protocol, encodeURI(url), '" target="_blank">url</a>').join("");}
 
 openTag
  = "<" tag:validFormatTag ">"
