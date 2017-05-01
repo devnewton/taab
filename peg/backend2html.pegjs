@@ -55,7 +55,7 @@ apos
  
 url
  = protocol:$((("http" "s"?) / "ftp") "://") url:$([^< \t\r\n])+
- { return [].concat('<a href="', protocol, encodeURI(url), '" target="_blank">url</a>').join("");}
+ { return [].concat('<a href="', protocol, encodeURI(url), '" target="_blank" rel="noreferrer">url</a>').join("");}
 
 openTag
  = "<" tag:validFormatTag ">"
