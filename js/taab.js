@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.message = "";
                 } else {
                     var self = this;
-                    var form = e.target;
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === 4) {
@@ -24,14 +23,15 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         }
                     };
-                    var body = new FormData(form);
+                    xhr.open("POST", "post.php");
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    var params = "message=" + encodeURIComponent(this.message).replace(/%20/g, '+');
                     var login = localStorage.login;
                     if (login) {
-                        body.append("login", login);
+                        params += "&login=" + encodeURIComponent(login).replace(/%20/g, '+');
                     }
-                    body.append("lastId", self.getLastId());
-                    xhr.open("POST", "post.php");
-                    xhr.send(body);
+                    params += "&lastId=" + self.getLastId();
+                    xhr.send(params);
                 }
             },
             get: function () {
