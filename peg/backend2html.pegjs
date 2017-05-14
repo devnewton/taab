@@ -84,7 +84,11 @@ closeTag
  }
 
 validFormatTag
- = ("b" / "i" / "s" / "u" / "tt")
+ = (spoiler / "b" / "i" / "s" / "u" / "tt")
+
+spoiler
+ = "spoiler"
+ { return "mark"; }
 
 invalidOpenTag
  = "<" tag:invalidTag ">"

@@ -85,6 +85,20 @@ figure:hover img {
 	top: 100%;
 }
 
+mark {
+    background-color: black;
+    color: black;
+}
+
+mark:hover {
+    background-color: inherit;
+}
+
+.revealed-spoiler {
+    background-color: inherit;
+    color: red;
+}
+
 .jb3-bigorno {
 	border: 1px solid #F00;
 }

@@ -73,6 +73,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             this.$refs.message.focus();
                         }
                         break;
+                    case 'MARK':
+                        e.target.classList.toggle('revealed-spoiler');
+                        break;
                 }
             },
             mouseEntered: function (e) {
