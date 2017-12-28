@@ -20,7 +20,7 @@ if (mb_strlen($login) === 0 && mb_strlen($info) === 0) {
 }
 
 if (mb_strlen(trim($message)) > 0 && mb_detect_encoding($message, 'UTF-8', true)) {
-    $posts = $pdo->prepare(
+    $pdo->prepare(
                     "INSERT INTO posts
             (login, info, message)
             VALUES (:login, :info, :message)
