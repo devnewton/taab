@@ -1,9 +1,9 @@
 # taab
 
-taab is a KISS tribune powered by vue.js, pegjs, blazecss and php (sorry).
+taab is a KISS tribune powered by vue.js, pegjs, blazecss, sqlite and php (sorry).
 
 ## features
 
-- simple TSV file backend.
+- TSV backend
 - lastId
 - X-Post-Id
