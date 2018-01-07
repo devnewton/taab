@@ -2,18 +2,22 @@
 
 include_once "config.php";
 
-function taab_echo_backend($lastId, $newPostId = NULL) {
+function taab_echo_backend($lastId, $room = '', $newPostId = NULL) {
     global $pdo;
     $posts = $pdo->prepare(
                     "SELECT id, strftime('%Y%m%d%H%M%S', time) as time, login, info, message
          FROM posts
          WHERE id > :lastId
+         and room = :room
          ORDER BY id DESC
          LIMIT :maxPosts");
-    $posts->execute(array("lastId" => $lastId, "maxPosts" => TAAB_BACKEND_MAX_POSTS));
+    $posts->execute(array("lastId" => $lastId, "room" => $room, "maxPosts" => TAAB_BACKEND_MAX_POSTS));
     header("Content-Type: text/tab-separated-values");
     if ($newPostId !== NULL) {
         header('X-Post-Id: ' . $newPostId);
+    }
+    if($room) {
+        header('X-Room: ' . $room);
     }
     $outstream = fopen("php://output", 'w');
     while($post = $posts->fetch(PDO::FETCH_OBJ)) {

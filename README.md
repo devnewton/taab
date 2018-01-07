@@ -7,3 +7,4 @@ taab is a KISS tribune powered by vue.js, pegjs, blazecss, sqlite and php (sorry
 - TSV backend
 - lastId
 - X-Post-Id
+- rooms

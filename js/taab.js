@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     new Vue({
         el: '#taab-coincoin',
         data: {
+            room: "",
             message: "",
             posts: []
         },
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === 4) {
                             if (xhr.status === 200) {
-                                self.parseBackendResponse(xhr.responseText);
+                                self.parseBackendResponse(xhr);
                                 self.message = "";
                             }
                         }
@@ -30,6 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (login) {
                         params += "&login=" + encodeURIComponent(login).replace(/%20/g, '+');
                     }
+                    var room = this.room;
+                    if (room) {
+                        params += "&room=" + encodeURIComponent(room).replace(/%20/g, '+');
+                    }
                     params += "&lastId=" + self.getLastId();
                     xhr.send(params);
                 }
@@ -40,20 +45,36 @@ document.addEventListener('DOMContentLoaded', function () {
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
-                            self.parseBackendResponse(xhr.responseText);
+                            self.parseBackendResponse(xhr);
                         }
                     }
                 };
-                xhr.open("GET", "get.php?lastId=" + encodeURIComponent(self.getLastId()));
+                var params = "?lastId=" + encodeURIComponent(self.getLastId());
+                var room = self.room;
+                if (room) {
+                    params += "&room=" + encodeURIComponent(room).replace(/%20/g, '+');
+                }
+                xhr.open("GET", "get.php" + params);
                 xhr.send();
             },
             handleCommand: function () {
-                return this.handleCommandNick();
+                return this.handleCommandNick() || this.handleCommandJoin();
             },
             handleCommandNick: function () {
                 var result = /\/nick (.*)/.exec(this.message);
                 if (result && result.length === 2) {
                     localStorage.login = result[1];
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            handleCommandJoin: function () {
+                var result = /\/join ?#?(\w+)?/.exec(this.message);
+                if (result && result.length === 2) {
+                    this.posts = [];
+                    this.room = result[1] || '';
+                    this.get();
                     return true;
                 } else {
                     return false;
@@ -106,25 +127,29 @@ document.addEventListener('DOMContentLoaded', function () {
                         break;
                 }
             },
-            parseBackendResponse: function (responseText) {
-                var newPosts = responseText.split(/\r\n|\n/).map(function (line) {
-                    var post = line.split(/\t/);
-                    if (post.length >= 5) {
-                        var time = post[1];
-                        var formattedTime = time.substr(0, 4) + "-" + time.substr(4, 2) + "-" + time.substr(6, 2) + "T" + time.substr(8, 2) + ":" + time.substr(10, 2) + ":" + time.substr(12, 2);
-                        var htmlMessage = taab_backend2html.parse(post[4]);
-                        return {id: post[0], time: formattedTime, info: post[2], login: post[3], message: htmlMessage};
-                    } else {
-                        return false;
-                    }
-                }).filter(function (post) {
-                    return post && post.id && post.time && post.message;
-                }).concat(this.posts);
-                this.posts = newPosts.sort(function (a, b) {
-                    return b.id - a.id;
-                }).filter(function (elem, pos) {
-                    return newPosts.indexOf(elem) === pos;
-                });
+            parseBackendResponse: function (xhr) {
+                var room = this.room || '';
+                var responseRoom = xhr.getResponseHeader("X-Room") || '';
+                if (room === responseRoom) {
+                    var newPosts = xhr.responseText.split(/\r\n|\n/).map(function (line) {
+                        var post = line.split(/\t/);
+                        if (post.length >= 5) {
+                            var time = post[1];
+                            var formattedTime = time.substr(0, 4) + "-" + time.substr(4, 2) + "-" + time.substr(6, 2) + "T" + time.substr(8, 2) + ":" + time.substr(10, 2) + ":" + time.substr(12, 2);
+                            var htmlMessage = taab_backend2html.parse(post[4]);
+                            return {id: post[0], time: formattedTime, info: post[2], login: post[3], message: htmlMessage};
+                        } else {
+                            return false;
+                        }
+                    }).filter(function (post) {
+                        return post && post.id && post.time && post.message;
+                    }).concat(this.posts);
+                    this.posts = newPosts.sort(function (a, b) {
+                        return b.id - a.id;
+                    }).filter(function (elem, pos) {
+                        return newPosts.indexOf(elem) === pos;
+                    });
+                }
             },
             getLastId: function () {
                 return this.posts.reduce(function (acc, val) {

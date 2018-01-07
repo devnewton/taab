@@ -5,6 +5,7 @@ $pdo = new PDO('sqlite:./data/backend.db');
 $pdo->query("CREATE TABLE IF NOT EXISTS posts ( 
 	id    INTEGER PRIMARY KEY AUTOINCREMENT,
 	time  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+        room  TEXT DEFAULT '' NOT NULL,
 	info  TEXT DEFAULT '' NOT NULL,
         login TEXT DEFAULT '' NOT NULL,
         message TEXT DEFAULT '' NOT NULL   
