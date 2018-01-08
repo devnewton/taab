@@ -2,10 +2,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var taab_backend2html = peg.generate(document.getElementById("taab-backend2html").textContent);
 
+    function hashToRoom() {
+        var result = /#(\w+)/.exec(window.location.hash);
+        if (result && result.length === 2) {
+            return result[1];
+        } else {
+            return '';
+        }
+    }
+
     new Vue({
         el: '#taab-coincoin',
         data: {
-            room: "",
+            room: hashToRoom(),
             message: "",
             posts: []
         },
@@ -74,7 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result && result.length === 2) {
                     this.posts = [];
                     this.room = result[1] || '';
-                    this.get();
+                    if (this.room !== hashToRoom()) {
+                        window.location = this.room ? "#" + this.room : '';
+                    }
                     return true;
                 } else {
                     return false;
@@ -127,6 +138,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         break;
                 }
             },
+            hashChanged: function (e) {
+                this.posts = [];
+                this.room = hashToRoom();
+                this.get();
+            },
             parseBackendResponse: function (xhr) {
                 var room = this.room || '';
                 var responseRoom = xhr.getResponseHeader("X-Room") || '';
@@ -159,6 +175,9 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         mounted: function () {
             var self = this;
+            window.onhashchange = function (e) {
+                self.hashChanged(e);
+            };
             self.get();
             setInterval(function () {
                 self.get();
