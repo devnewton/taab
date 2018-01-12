@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     this.posts = [];
                     this.room = result[1] || '';
                     if (this.room !== hashToRoom()) {
-                        window.location = this.room ? "#" + this.room : '';
+                        window.location = "#" + this.room;
                     }
                     return true;
                 } else {
