@@ -1,3 +1,4 @@
+<?php include_once "config.php"; ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +27,11 @@
             </transition-group>
         </main>
         <footer class="o-container o-container--xsmall u-pillar-box--xsmall u-xsmall">Discussion powered by <a href="https://github.com/devnewton/taab">taab</a></footer>
-        <script src="js/vue.js" defer></script>
+        <?php if (TAAB_DEV): ?>
+            <script src="js/vue-dev.js" defer></script>
+        <?php else: ?>
+            <script src="js/vue.js" defer></script>
+        <?php endif; ?>
         <script src="js/peg-0.10.0.js" defer></script>
         <script id="taab-backend2html" type="text/peg">
             <?php readfile("peg/backend2html.pegjs") ?>
