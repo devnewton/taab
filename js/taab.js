@@ -11,12 +11,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    new Vue({
-        el: '#taab-coincoin',
-        data: {
-            room: hashToRoom(),
-            message: "",
-            posts: []
+    Vue.component("taab-coincoin", {
+        template: '#taab-coincoin',
+        data: function () {
+            return {
+                room: hashToRoom(),
+                message: "",
+                posts: []
+            };
         },
         methods: {
             post: function (e) {
@@ -184,5 +186,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 30000);
         }
     });
+
+    new Vue({
+        el: '#taab-app',
+    })
 
 });
