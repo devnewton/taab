@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return this.handleCommandNick() || this.handleCommandJoin();
             },
             handleCommandNick: function () {
-                var result = /\/nick (.*)/.exec(this.message);
+                var result = /^\/nick (.*)/.exec(this.message);
                 if (result && result.length === 2) {
                     localStorage.login = result[1];
                     return true;
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
             handleCommandJoin: function () {
-                var result = /\/join ?#?(\w+)?/.exec(this.message);
+                var result = /^\/join ?#?(\w+)?/.exec(this.message);
                 if (result && result.length === 2) {
                     this.posts = [];
                     this.room = result[1] || '';
