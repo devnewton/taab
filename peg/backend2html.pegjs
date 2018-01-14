@@ -84,7 +84,7 @@ closeTag
  }
 
 validFormatTag
- = (spoiler / "b" / "i" / "s" / "u" / "tt")
+ = (spoiler / "b" / "i" / "s" / "u" / "tt" / "code" )
 
 spoiler
  = "spoiler"
