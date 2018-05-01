@@ -5,7 +5,7 @@ include_once "config.php";
 function taab_echo_backend($lastId, $room = '', $newPostId = NULL) {
     global $pdo;
     $posts = $pdo->prepare(
-                    "SELECT id, strftime('%Y%m%d%H%M%S', time) as time, login, info, message
+                    "SELECT id, strftime('%s', time) as time, login, info, message
          FROM posts
          WHERE id > :lastId
          and room = :room
@@ -23,7 +23,7 @@ function taab_echo_backend($lastId, $room = '', $newPostId = NULL) {
     while($post = $posts->fetch(PDO::FETCH_OBJ)) {
         fputs($outstream, $post->id);
         fputs($outstream, "\t");
-        fputs($outstream, $post->time);
+        fputs($outstream, strftime('%Y%m%d%H%M%S', $post->time));
         fputs($outstream, "\t");
         fputs($outstream, $post->info);
         fputs($outstream, "\t");

@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Europe/Paris');
+
 $pdo = new PDO('sqlite:./data/backend.db');
 
 $pdo->query("CREATE TABLE IF NOT EXISTS posts ( 
