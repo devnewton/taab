@@ -118,7 +118,7 @@ norloge
  = fullNorloge / normalNorloge / shortNorloge
 
 fullNorloge
- = y: norlogeYear "-" m: norlogeMonth "-" d:norlogeDay "T" h:norlogeHours ":" mi:norlogeMinutes ":" s:norlogeSeconds
+ = y: norlogeYear "-" m: norlogeMonth "-" d:norlogeDay [T# ] h:norlogeHours ":" mi:norlogeMinutes ":" s:norlogeSeconds
  {
  var time = h + ':' + mi  + ':' + s;
  return '<time title="' + y + "-" + m + "-" + d + "T" + time + '">' + time + '</time>';
