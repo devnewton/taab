@@ -37,10 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     };
                     xhr.open("POST", "post.php");
                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    var info = localStorage.info;
+                    if (info) {
+                        xhr.setRequestHeader("User-Agent", info);
+                    }
                     var params = "message=" + encodeURIComponent(this.message).replace(/%20/g, '+');
-                    var login = localStorage.login;
-                    if (login) {
-                        params += "&login=" + encodeURIComponent(login).replace(/%20/g, '+');
+                    var token = localStorage.token;
+                    if (token) {
+                        params += "&token=" + encodeURIComponent(token).replace(/%20/g, '+');
                     }
                     var room = this.room;
                     if (room) {
@@ -69,12 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 xhr.send();
             },
             handleCommand: function () {
-                return this.handleCommandNick() || this.handleCommandJoin();
+                return this.handleCommandInfo() || this.handleCommandJoin();
             },
-            handleCommandNick: function () {
-                var result = /^\/nick (.*)/.exec(this.message);
+            handleCommandInfo: function () {
+                var result = /^\/info (.*)/.exec(this.message);
                 if (result && result.length === 2) {
-                    localStorage.login = result[1];
+                    localStorage.info = result[1];
                     return true;
                 } else {
                     return false;

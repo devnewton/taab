@@ -18,7 +18,7 @@
                 <form class="c-input-group" v-on:submit.prevent="post" accept-charset="UTF-8" enctype="application/x-www-form-urlencoded" autofocus>
                     <div v-if="room" class="c-button">#{{ room }}</div>
                     <div class="o-field">
-                        <input v-model="message" ref="message" name="message" placeholder="message or command (/nick, /join)" class="c-field" spellcheck="true">
+                        <input v-model="message" ref="message" name="message" placeholder="message or command (/info, /join)" class="c-field" spellcheck="true">
                     </div>
                     <button type="submit" class="c-button c-button--info">Post</button>
                 </form>
@@ -33,7 +33,9 @@
                 </transition-group>
             </main>
         </template>
-        <footer class="o-container o-container--xsmall u-pillar-box--xsmall u-xsmall">Discussion powered by <a href="https://github.com/devnewton/taab">taab</a></footer>
+        <footer class="o-container o-container--small u-pillar-box--xsmall u-xsmall">
+            <a class="c-badge c-badge--info" href="register-form.php">Register</a> Discussion powered by <a href="https://github.com/devnewton/taab">taab</a>
+        </footer>
         <?php if (TAAB_DEV): ?>
             <script src="js/vue-dev.js" defer></script>
         <?php else: ?>
