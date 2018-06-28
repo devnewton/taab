@@ -4,7 +4,6 @@ date_default_timezone_set('Europe/Paris');
 
 $pdo = new PDO('sqlite:./data/backend.db');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
 $pdo->query("CREATE TABLE IF NOT EXISTS posts ( 
 	id    INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,8 +16,9 @@ $pdo->query("CREATE TABLE IF NOT EXISTS posts (
 
 $pdo->query("CREATE TABLE IF NOT EXISTS users ( 
         mail  TEXT NOT NULL PRIMARY KEY,
-        login TEXT DEFAULT '' NOT NULL,
-        token  TEXT DEFAULT '' NOT NULL
+        login TEXT DEFAULT '' NOT NULL ,
+        token  TEXT DEFAULT '' NOT NULL,
+        CONSTRAINT login_unique UNIQUE (login)
 );");
 
 define("TAAB_BACKEND_MAX_POSTS", 200);
