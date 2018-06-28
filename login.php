@@ -12,9 +12,9 @@
     </body>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var result = /#(\w+)/.exec(window.location.hash);
-            if (result && result.length === 2) {
-                localStorage.token = result[1];
+            var token = new URL(window.location.href).hash.substr(1);
+            if (token) {
+                localStorage.token = token;
                 window.location = "/";
             } else {
                 document.getElementsByTagName("body")[0].innerText = "Cannot find login token :-(";

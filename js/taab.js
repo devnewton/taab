@@ -1,13 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     var taab_backend2html = peg.generate(document.getElementById("taab-backend2html").textContent);
+
     function hashToRoom() {
-        var result = /#(\w+)/.exec(window.location.hash);
-        if (result && result.length === 2) {
-            return result[1];
-        } else {
-            return '';
-        }
+        return new URL(window.location.href).hash.substr(1);
     }
 
     Vue.component("taab-coincoin", {
