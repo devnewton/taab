@@ -1,18 +1,18 @@
 article:nth-of-type(odd) {
-	background-color: #FBFBFB;
+    background-color: #FBFBFB;
 }
 
 article>time {
-	padding-right: 5px;
-	padding-left: 5px;
-	text-align: center;
-	color: black;
-	font-weight: bold;
-	white-space: nowrap;
-	display: inline-block;
-	vertical-align: text-top;
-        margin: auto;
-        cursor:pointer;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: text-top;
+    margin: auto;
+    cursor:pointer;
 }
 
 p time {
@@ -21,46 +21,50 @@ p time {
 }
 
 article>cite {
-	padding-right: 5px;
-	padding-left: 5px;
-	color: #833;
-	display: inline-block;
-	word-break: break-all;
-	vertical-align: text-top;
-        margin: auto;
-        cursor: pointer;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #833;
+    display: inline-block;
+    word-break: break-all;
+    vertical-align: text-top;
+    margin: auto;
+    cursor: pointer;
+}
+
+.login {
+    font-style: normal;
 }
 
 p {
-	padding-right: 5px;
-	padding-left: 5px;
-	color: black;
-	word-break: break-all;
-	display: inline-block;
-	vertical-align: text-top;
-        margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: black;
+    word-break: break-all;
+    display: inline-block;
+    vertical-align: text-top;
+    margin: auto;
 }
 
 p a {
-	font-weight: bold;
-	color: #1690f3;
+    font-weight: bold;
+    color: #1690f3;
 }
 
 p a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 p a:visited {
-	color: #0b78d0;
+    color: #0b78d0;
 }
 
 p cite {
-	border: 1px solid #F00;
-        cursor: pointer;
+    border: 1px solid #F00;
+    cursor: pointer;
 }
 
 p cite:after {
-	content: '<';
+    content: '<';
 }
 
 .highlighted {
@@ -68,21 +72,21 @@ p cite:after {
 }
 
 figure {
-        display: inline;
-	position: relative;
-	font-weight: bold;
-	color: #0A1;
-        margin: unset;
+    display: inline;
+    position: relative;
+    font-weight: bold;
+    color: #0A1;
+    margin: unset;
 }
 
 figure img {
-	display: none;
+    display: none;
 }
 
 figure:hover img {
-	display: inline;
-	position: absolute;
-	top: 100%;
+    display: inline;
+    position: absolute;
+    top: 100%;
 }
 
 mark {
@@ -100,13 +104,13 @@ mark:hover {
 }
 
 .jb3-bigorno {
-	border: 1px solid #F00;
+    border: 1px solid #F00;
 }
 
 .posts-enter-active, .posts-leave-active {
-  transition: all 1s;
+    transition: all 1s;
 }
 .posts-enter, .posts-leave-to {
-  opacity: 0;
-  transform: translateX(100%);
+    opacity: 0;
+    transform: translateX(100%);
 }
