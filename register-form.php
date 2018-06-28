@@ -18,7 +18,7 @@
                 Login:
                 <input name="login" type="text" class="c-field c-field--label" placeholder="DarkKevin666">
             </label>
-              <button class="c-button c-button--info">Register</button>
+            <input type="submit" class="c-button c-button--info">
         </form>
     </body>
 </html>
